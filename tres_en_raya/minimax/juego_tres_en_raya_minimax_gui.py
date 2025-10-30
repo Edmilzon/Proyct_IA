@@ -19,19 +19,26 @@ FONT_PRINCIPAL = ('Consolas', 14)
 FONT_TABLERO = ('Consolas', 48, 'bold')
 
 class TresEnRayaGUIMinimax:
-    def __init__(self, root):
-        self.root = root
+    def __init__(self, master_window):
+        self.master = master_window
+        self.root = tk.Toplevel(self.master)
         self.root.title("Tres en Raya - Humano vs IA (Minimax)")
         self.estado_juego = [0] * 9
         self.botones = []
-        self.crear_widgets()
         self.juego_terminado = False
         self.respuesta_inicio = None
+
+        def on_close():
+            # Al cerrar la ventana del juego, volvemos a mostrar el menú principal del lanzador
+            self.master.deiconify()
+            self.root.destroy()
+        self.root.protocol("WM_DELETE_WINDOW", on_close)
 
         self.root.config(bg=COLOR_FONDO, padx=10, pady=10)
         self.label_estado = tk.Label(self.root, text="¡Bienvenido!", font=FONT_PRINCIPAL, bg=COLOR_FONDO, fg=COLOR_TEXTO)
         self.label_estado.grid(row=1, column=0, pady=(15, 20))
         
+        self.crear_widgets()
         self.iniciar_nuevo_juego()
 
     def crear_widgets(self):
@@ -174,10 +181,11 @@ class TresEnRayaGUIMinimax:
     def reiniciar_juego(self):
         self.iniciar_nuevo_juego()
 
-def iniciar_juego_minimax():
-    root = tk.Tk()
-    juego = TresEnRayaGUIMinimax(root)
-    root.mainloop()
+def iniciar_juego_minimax(master_window):
+    juego = TresEnRayaGUIMinimax(master_window)
 
 if __name__ == "__main__":
-    iniciar_juego_minimax()
+    main_launcher = tk.Tk()
+    main_launcher.withdraw() # Ocultamos la ventana principal falsa
+    iniciar_juego_minimax(main_launcher)
+    main_launcher.mainloop()

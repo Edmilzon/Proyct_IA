@@ -14,10 +14,10 @@ FONT_TITULO = ('Consolas', 24, 'bold')
 FONT_BOTON = ('Consolas', 16)
 
 def lanzar_menu_tres_en_raya(ventana_actual):
-
     print("Lanzando el menú de Tres en Raya...")
-    ventana_actual.destroy()
-    crear_menu_principal()
+    ventana_actual.withdraw()  # Ocultamos la ventana principal en lugar de destruirla
+    # Pasamos la ventana principal como master para el nuevo menú
+    crear_menu_principal(ventana_actual)
 
 def crear_lanzador_principal():
     root = tk.Tk()
