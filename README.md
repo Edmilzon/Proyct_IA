@@ -41,11 +41,8 @@ Usar un entorno virtual para aislar las dependencias del proyecto.
 # Crear el entorno virtual
 py -m venv .venv
 
-# Activar en Windows
-.venv\Scripts\activate
-
-# Activar en macOS/Linux
-source .venv/bin/activate
+# Activar en Windows/macOS/Linux
+source .venv/Scripts/activate
 ```
 
 ### 4. Instalar Dependencias
