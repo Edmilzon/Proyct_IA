@@ -1,0 +1,11 @@
+##crear el entorno virtual 
+py -m venv .venv
+
+##iniciar el entorno virtual 
+source .venv/Scripts/activate
+
+##crea lista de las librerias libreria
+pip freeze > requirements.txt
+
+## instal alas librerias para el proyecto 
+pip install -r requirements.txt
